@@ -36,7 +36,7 @@ if __name__ == '__main__':
 	try:
 		cFilePath = sys.argv[1]
 	except:
-		cFilePath = "config.json"
+		cFilePath = "petclinic2/config.json"
 
 	# Read configuration file
 	with open(cFilePath) as j:

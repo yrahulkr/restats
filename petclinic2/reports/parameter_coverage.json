@@ -1,0 +1,651 @@
+{
+	"documentedAndTested": {
+		"/owners": {
+			"get": [
+				"page",
+				"lastName"
+			]
+		},
+		"/owners/new": {
+			"post": [
+				"firstName",
+				"lastName",
+				"address",
+				"city",
+				"telephone"
+			]
+		},
+		"/vets.html": {
+			"get": [
+				"page"
+			]
+		},
+		"/owners/{ownerId}/pets/new": {
+			"post": [
+				"id",
+				"name",
+				"birthDate"
+			]
+		}
+	},
+	"documentedAndNotTested": {
+		"/error": {
+			"get": [],
+			"put": [],
+			"post": [],
+			"delete": [],
+			"options": [],
+			"head": [],
+			"patch": [],
+			"trace": []
+		},
+		"/oups": {
+			"get": []
+		},
+		"/actuator/beans": {
+			"get": []
+		},
+		"/actuator/caches": {
+			"get": [],
+			"delete": []
+		},
+		"/actuator/caches/{cache}": {
+			"get": [],
+			"delete": []
+		},
+		"/actuator/conditions": {
+			"get": []
+		},
+		"/actuator/configprops": {
+			"get": []
+		},
+		"/actuator/configprops/{prefix}": {
+			"get": []
+		},
+		"/actuator/env": {
+			"get": []
+		},
+		"/actuator/env/{toMatch}": {
+			"get": []
+		},
+		"/actuator/health": {
+			"get": []
+		},
+		"/actuator/health/**": {
+			"get": []
+		},
+		"/actuator/heapdump": {
+			"get": []
+		},
+		"/actuator/info": {
+			"get": []
+		},
+		"/actuator/loggers": {
+			"get": []
+		},
+		"/actuator/loggers/{name}": {
+			"get": [],
+			"post": []
+		},
+		"/actuator/mappings": {
+			"get": []
+		},
+		"/actuator/metrics": {
+			"get": []
+		},
+		"/actuator/metrics/{requiredMetricName}": {
+			"get": []
+		},
+		"/actuator/scheduledtasks": {
+			"get": []
+		},
+		"/actuator/threaddump": {
+			"get": []
+		},
+		"/owners": {
+			"get": [
+				"address",
+				"city",
+				"firstName",
+				"id",
+				"new",
+				"pets[0].birthDate",
+				"pets[0].id",
+				"pets[0].name",
+				"pets[0].new",
+				"pets[0].owner.address",
+				"pets[0].owner.city",
+				"pets[0].owner.firstName",
+				"pets[0].owner.id",
+				"pets[0].owner.lastName",
+				"pets[0].owner.new",
+				"pets[0].owner.telephone",
+				"pets[0].type.id",
+				"pets[0].type.name",
+				"pets[0].type.new",
+				"pets[0].visits[0].date",
+				"pets[0].visits[0].description",
+				"pets[0].visits[0].id",
+				"pets[0].visits[0].new",
+				"pets[0].visits[0].petId",
+				"telephone"
+			]
+		},
+		"/owners/find": {
+			"get": [
+				"model"
+			]
+		},
+		"/owners/new": {
+			"get": [
+				"model"
+			],
+			"post": [
+				"id",
+				"new",
+				"pets[0].birthDate",
+				"pets[0].id",
+				"pets[0].name",
+				"pets[0].new",
+				"pets[0].owner.address",
+				"pets[0].owner.city",
+				"pets[0].owner.firstName",
+				"pets[0].owner.id",
+				"pets[0].owner.lastName",
+				"pets[0].owner.new",
+				"pets[0].owner.telephone",
+				"pets[0].type.id",
+				"pets[0].type.name",
+				"pets[0].type.new",
+				"pets[0].visits[0].date",
+				"pets[0].visits[0].description",
+				"pets[0].visits[0].id",
+				"pets[0].visits[0].new",
+				"pets[0].visits[0].petId"
+			]
+		},
+		"/owners/{ownerId}": {
+			"get": []
+		},
+		"/owners/{ownerId}/edit": {
+			"get": [],
+			"post": [
+				"address",
+				"city",
+				"firstName",
+				"id",
+				"lastName",
+				"new",
+				"pets[0].birthDate",
+				"pets[0].id",
+				"pets[0].name",
+				"pets[0].new",
+				"pets[0].owner.address",
+				"pets[0].owner.city",
+				"pets[0].owner.firstName",
+				"pets[0].owner.id",
+				"pets[0].owner.lastName",
+				"pets[0].owner.new",
+				"pets[0].owner.telephone",
+				"pets[0].type.id",
+				"pets[0].type.name",
+				"pets[0].type.new",
+				"pets[0].visits[0].date",
+				"pets[0].visits[0].description",
+				"pets[0].visits[0].id",
+				"pets[0].visits[0].new",
+				"pets[0].visits[0].petId",
+				"telephone"
+			]
+		},
+		"/owners/{ownerId}/pets/new": {
+			"get": [
+				"address",
+				"city",
+				"firstName",
+				"id",
+				"lastName",
+				"new",
+				"pets[0].birthDate",
+				"pets[0].id",
+				"pets[0].name",
+				"pets[0].new",
+				"pets[0].owner.address",
+				"pets[0].owner.city",
+				"pets[0].owner.firstName",
+				"pets[0].owner.id",
+				"pets[0].owner.lastName",
+				"pets[0].owner.new",
+				"pets[0].owner.telephone",
+				"pets[0].type.id",
+				"pets[0].type.name",
+				"pets[0].type.new",
+				"pets[0].visits[0].date",
+				"pets[0].visits[0].description",
+				"pets[0].visits[0].id",
+				"pets[0].visits[0].new",
+				"pets[0].visits[0].petId",
+				"telephone",
+				"model"
+			],
+			"post": [
+				"address",
+				"city",
+				"firstName",
+				"lastName",
+				"new",
+				"owner.address",
+				"owner.city",
+				"owner.firstName",
+				"owner.id",
+				"owner.lastName",
+				"owner.new",
+				"owner.pets[0].birthDate",
+				"owner.pets[0].id",
+				"owner.pets[0].name",
+				"owner.pets[0].new",
+				"owner.pets[0].type.id",
+				"owner.pets[0].type.name",
+				"owner.pets[0].type.new",
+				"owner.pets[0].visits[0].date",
+				"owner.pets[0].visits[0].description",
+				"owner.pets[0].visits[0].id",
+				"owner.pets[0].visits[0].new",
+				"owner.pets[0].visits[0].petId",
+				"owner.telephone",
+				"pets[0].birthDate",
+				"pets[0].id",
+				"pets[0].name",
+				"pets[0].new",
+				"pets[0].owner.address",
+				"pets[0].owner.city",
+				"pets[0].owner.firstName",
+				"pets[0].owner.id",
+				"pets[0].owner.lastName",
+				"pets[0].owner.new",
+				"pets[0].owner.telephone",
+				"pets[0].type.id",
+				"pets[0].type.name",
+				"pets[0].type.new",
+				"pets[0].visits[0].date",
+				"pets[0].visits[0].description",
+				"pets[0].visits[0].id",
+				"pets[0].visits[0].new",
+				"pets[0].visits[0].petId",
+				"telephone",
+				"type.id",
+				"type.name",
+				"type.new",
+				"visits[0].date",
+				"visits[0].description",
+				"visits[0].id",
+				"visits[0].new",
+				"visits[0].petId",
+				"model"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"get": [
+				"model"
+			],
+			"post": [
+				"address",
+				"birthDate",
+				"city",
+				"firstName",
+				"id",
+				"lastName",
+				"name",
+				"new",
+				"owner.address",
+				"owner.city",
+				"owner.firstName",
+				"owner.id",
+				"owner.lastName",
+				"owner.new",
+				"owner.pets[0].birthDate",
+				"owner.pets[0].id",
+				"owner.pets[0].name",
+				"owner.pets[0].new",
+				"owner.pets[0].type.id",
+				"owner.pets[0].type.name",
+				"owner.pets[0].type.new",
+				"owner.pets[0].visits[0].date",
+				"owner.pets[0].visits[0].description",
+				"owner.pets[0].visits[0].id",
+				"owner.pets[0].visits[0].new",
+				"owner.pets[0].visits[0].petId",
+				"owner.telephone",
+				"pets[0].birthDate",
+				"pets[0].id",
+				"pets[0].name",
+				"pets[0].new",
+				"pets[0].owner.address",
+				"pets[0].owner.city",
+				"pets[0].owner.firstName",
+				"pets[0].owner.id",
+				"pets[0].owner.lastName",
+				"pets[0].owner.new",
+				"pets[0].owner.telephone",
+				"pets[0].type.id",
+				"pets[0].type.name",
+				"pets[0].type.new",
+				"pets[0].visits[0].date",
+				"pets[0].visits[0].description",
+				"pets[0].visits[0].id",
+				"pets[0].visits[0].new",
+				"pets[0].visits[0].petId",
+				"telephone",
+				"type.id",
+				"type.name",
+				"type.new",
+				"visits[0].date",
+				"visits[0].description",
+				"visits[0].id",
+				"visits[0].new",
+				"visits[0].petId",
+				"model"
+			]
+		},
+		"/vets": {
+			"get": []
+		},
+		"/vets.html": {
+			"get": []
+		},
+		"/owners/*/pets/{petId}/visits/new": {
+			"get": [
+				"model"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/visits/new": {
+			"post": [
+				"date",
+				"description",
+				"id",
+				"new",
+				"petId"
+			]
+		},
+		"/actuator": {
+			"get": []
+		},
+		"/": {
+			"get": []
+		}
+	},
+	"notDocumentedAndTested": {
+		"/owners/{ownerId}/pets/new": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive"
+			],
+			"post": [
+				"Upgrade-Insecure-Requests",
+				"Origin",
+				"Content-Type",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Cache-Control",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive",
+				"type"
+			]
+		},
+		"/owners/find": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive"
+			]
+		},
+		"/owners": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive"
+			]
+		},
+		"/owners/{ownerId}": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive",
+				"Origin",
+				"Cache-Control"
+			]
+		},
+		"/vets.html": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive"
+			]
+		},
+		"/": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive",
+				"Cache-Control",
+				"Referer"
+			]
+		},
+		"/owners/{ownerId}/edit": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive"
+			]
+		},
+		"/owners/new": {
+			"post": [
+				"Upgrade-Insecure-Requests",
+				"Origin",
+				"Content-Type",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Cache-Control",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language"
+			],
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive"
+			]
+		},
+		"/owners/*/pets/{petId}/visits/new": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive"
+			],
+			"post": [
+				"Upgrade-Insecure-Requests",
+				"Origin",
+				"Content-Type",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Cache-Control",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"date",
+				"description",
+				"petId"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"get": [
+				"Upgrade-Insecure-Requests",
+				"User-Agent",
+				"Referer",
+				"Host",
+				"Connection",
+				"Accept",
+				"Sec-Fetch-Site",
+				"Sec-Fetch-Mode",
+				"Sec-Fetch-User",
+				"Sec-Fetch-Dest",
+				"Accept-Encoding",
+				"Accept-Language",
+				"Content-Type",
+				"Content-Language",
+				"Transfer-Encoding",
+				"Date",
+				"Keep-Alive"
+			]
+		}
+	}
+}

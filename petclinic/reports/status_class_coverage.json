@@ -1,0 +1,309 @@
+{
+	"documentedAndTested": {
+		"/": {
+			"get": [
+				"2"
+			]
+		},
+		"/owners": {
+			"get": [
+				"2"
+			]
+		},
+		"/owners/*/pets/{petId}/visits/new": {
+			"get": [
+				"2"
+			]
+		},
+		"/owners/find": {
+			"get": [
+				"2"
+			]
+		},
+		"/owners/new": {
+			"get": [
+				"2"
+			]
+		},
+		"/owners/{ownerId}": {
+			"get": [
+				"2"
+			]
+		},
+		"/owners/{ownerId}/edit": {
+			"get": [
+				"2"
+			]
+		},
+		"/owners/{ownerId}/pets/new": {
+			"get": [
+				"2"
+			],
+			"post": [
+				"2"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"get": [
+				"2"
+			]
+		},
+		"/vets.html": {
+			"get": [
+				"2"
+			]
+		}
+	},
+	"documentedAndNotTested": {
+		"/error": {
+			"get": [
+				"4",
+				"2"
+			],
+			"put": [
+				"4",
+				"2"
+			],
+			"post": [
+				"4",
+				"2"
+			],
+			"delete": [
+				"4",
+				"2"
+			],
+			"options": [
+				"4",
+				"2"
+			],
+			"head": [
+				"4",
+				"2"
+			],
+			"patch": [
+				"4",
+				"2"
+			],
+			"trace": [
+				"4",
+				"2"
+			]
+		},
+		"/oups": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/beans": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/caches": {
+			"get": [
+				"4",
+				"2"
+			],
+			"delete": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/caches/{cache}": {
+			"get": [
+				"4",
+				"2"
+			],
+			"delete": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/conditions": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/configprops": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/configprops/{prefix}": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/env": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/env/{toMatch}": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/health": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/health/**": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/heapdump": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/info": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/loggers": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/loggers/{name}": {
+			"get": [
+				"4",
+				"2"
+			],
+			"post": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/mappings": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/metrics": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/metrics/{requiredMetricName}": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/scheduledtasks": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator/threaddump": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/owners": {
+			"get": [
+				"4"
+			]
+		},
+		"/owners/find": {
+			"get": [
+				"4"
+			]
+		},
+		"/owners/new": {
+			"get": [
+				"4"
+			],
+			"post": [
+				"4",
+				"2"
+			]
+		},
+		"/owners/{ownerId}": {
+			"get": [
+				"4"
+			]
+		},
+		"/owners/{ownerId}/edit": {
+			"get": [
+				"4"
+			],
+			"post": [
+				"4",
+				"2"
+			]
+		},
+		"/owners/{ownerId}/pets/new": {
+			"get": [
+				"4"
+			],
+			"post": [
+				"4"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"get": [
+				"4"
+			],
+			"post": [
+				"4",
+				"2"
+			]
+		},
+		"/vets": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/vets.html": {
+			"get": [
+				"4"
+			]
+		},
+		"/owners/*/pets/{petId}/visits/new": {
+			"get": [
+				"4"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/visits/new": {
+			"post": [
+				"4",
+				"2"
+			]
+		},
+		"/actuator": {
+			"get": [
+				"4",
+				"2"
+			]
+		},
+		"/": {
+			"get": [
+				"4"
+			]
+		}
+	},
+	"notDocumentedAndTested": {}
+}

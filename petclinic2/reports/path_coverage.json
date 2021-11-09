@@ -1,0 +1,40 @@
+{
+	"documentedAndTested": [
+		"/owners/{ownerId}/pets/new",
+		"/owners/find",
+		"/owners",
+		"/owners/{ownerId}",
+		"/vets.html",
+		"/",
+		"/owners/{ownerId}/edit",
+		"/owners/new",
+		"/owners/*/pets/{petId}/visits/new",
+		"/owners/{ownerId}/pets/{petId}/edit"
+	],
+	"documentedAndNotTested": [
+		"/error",
+		"/oups",
+		"/actuator/beans",
+		"/actuator/caches",
+		"/actuator/caches/{cache}",
+		"/actuator/conditions",
+		"/actuator/configprops",
+		"/actuator/configprops/{prefix}",
+		"/actuator/env",
+		"/actuator/env/{toMatch}",
+		"/actuator/health",
+		"/actuator/health/**",
+		"/actuator/heapdump",
+		"/actuator/info",
+		"/actuator/loggers",
+		"/actuator/loggers/{name}",
+		"/actuator/mappings",
+		"/actuator/metrics",
+		"/actuator/metrics/{requiredMetricName}",
+		"/actuator/scheduledtasks",
+		"/actuator/threaddump",
+		"/vets",
+		"/owners/{ownerId}/pets/{petId}/visits/new",
+		"/actuator"
+	]
+}

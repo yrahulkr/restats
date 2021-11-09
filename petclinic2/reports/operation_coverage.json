@@ -1,0 +1,148 @@
+{
+	"documentedAndTested": {
+		"/": [
+			"get"
+		],
+		"/owners": [
+			"get"
+		],
+		"/owners/*/pets/{petId}/visits/new": [
+			"get"
+		],
+		"/owners/find": [
+			"get"
+		],
+		"/owners/new": [
+			"get",
+			"post"
+		],
+		"/owners/{ownerId}": [
+			"get"
+		],
+		"/owners/{ownerId}/edit": [
+			"get"
+		],
+		"/owners/{ownerId}/pets/new": [
+			"get",
+			"post"
+		],
+		"/owners/{ownerId}/pets/{petId}/edit": [
+			"get"
+		],
+		"/vets.html": [
+			"get"
+		]
+	},
+	"documentedAndNotTested": {
+		"/error": [
+			"get",
+			"put",
+			"post",
+			"delete",
+			"options",
+			"head",
+			"patch",
+			"trace"
+		],
+		"/oups": [
+			"get"
+		],
+		"/actuator/beans": [
+			"get"
+		],
+		"/actuator/caches": [
+			"get",
+			"delete"
+		],
+		"/actuator/caches/{cache}": [
+			"get",
+			"delete"
+		],
+		"/actuator/conditions": [
+			"get"
+		],
+		"/actuator/configprops": [
+			"get"
+		],
+		"/actuator/configprops/{prefix}": [
+			"get"
+		],
+		"/actuator/env": [
+			"get"
+		],
+		"/actuator/env/{toMatch}": [
+			"get"
+		],
+		"/actuator/health": [
+			"get"
+		],
+		"/actuator/health/**": [
+			"get"
+		],
+		"/actuator/heapdump": [
+			"get"
+		],
+		"/actuator/info": [
+			"get"
+		],
+		"/actuator/loggers": [
+			"get"
+		],
+		"/actuator/loggers/{name}": [
+			"get",
+			"post"
+		],
+		"/actuator/mappings": [
+			"get"
+		],
+		"/actuator/metrics": [
+			"get"
+		],
+		"/actuator/metrics/{requiredMetricName}": [
+			"get"
+		],
+		"/actuator/scheduledtasks": [
+			"get"
+		],
+		"/actuator/threaddump": [
+			"get"
+		],
+		"/owners": [],
+		"/owners/find": [],
+		"/owners/new": [],
+		"/owners/{ownerId}": [],
+		"/owners/{ownerId}/edit": [
+			"post"
+		],
+		"/owners/{ownerId}/pets/new": [],
+		"/owners/{ownerId}/pets/{petId}/edit": [
+			"post"
+		],
+		"/vets": [
+			"get"
+		],
+		"/vets.html": [],
+		"/owners/*/pets/{petId}/visits/new": [],
+		"/owners/{ownerId}/pets/{petId}/visits/new": [
+			"post"
+		],
+		"/actuator": [
+			"get"
+		],
+		"/": []
+	},
+	"notDocumentedAndTested": {
+		"/": [],
+		"/owners": [],
+		"/owners/*/pets/{petId}/visits/new": [
+			"post"
+		],
+		"/owners/find": [],
+		"/owners/new": [],
+		"/owners/{ownerId}": [],
+		"/owners/{ownerId}/edit": [],
+		"/owners/{ownerId}/pets/new": [],
+		"/owners/{ownerId}/pets/{petId}/edit": [],
+		"/vets.html": []
+	}
+}

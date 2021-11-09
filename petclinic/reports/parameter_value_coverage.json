@@ -1,0 +1,326 @@
+{
+	"documentedAndTested": {
+		"/owners": {
+			"get": {
+				"new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": []
+			}
+		},
+		"/owners/new": {
+			"post": {
+				"new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": []
+			}
+		},
+		"/owners/{ownerId}/edit": {
+			"post": {
+				"new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": []
+			}
+		},
+		"/owners/{ownerId}/pets/new": {
+			"get": {
+				"new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": []
+			},
+			"post": {
+				"new": [],
+				"owner.new": [],
+				"owner.pets[0].new": [],
+				"owner.pets[0].type.new": [],
+				"owner.pets[0].visits[0].new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": [],
+				"type.new": [],
+				"visits[0].new": []
+			}
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"post": {
+				"new": [],
+				"owner.new": [],
+				"owner.pets[0].new": [],
+				"owner.pets[0].type.new": [],
+				"owner.pets[0].visits[0].new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": [],
+				"type.new": [],
+				"visits[0].new": []
+			}
+		}
+	},
+	"documentedAndNotTested": {
+		"/owners": {
+			"get": {
+				"new": [
+					"true",
+					"false"
+				],
+				"pets[0].new": [
+					"true",
+					"false"
+				],
+				"pets[0].owner.new": [
+					"true",
+					"false"
+				],
+				"pets[0].type.new": [
+					"true",
+					"false"
+				],
+				"pets[0].visits[0].new": [
+					"true",
+					"false"
+				]
+			}
+		},
+		"/owners/new": {
+			"post": {
+				"new": [
+					"true",
+					"false"
+				],
+				"pets[0].new": [
+					"true",
+					"false"
+				],
+				"pets[0].owner.new": [
+					"true",
+					"false"
+				],
+				"pets[0].type.new": [
+					"true",
+					"false"
+				],
+				"pets[0].visits[0].new": [
+					"true",
+					"false"
+				]
+			}
+		},
+		"/owners/{ownerId}/edit": {
+			"post": {
+				"new": [
+					"true",
+					"false"
+				],
+				"pets[0].new": [
+					"true",
+					"false"
+				],
+				"pets[0].owner.new": [
+					"true",
+					"false"
+				],
+				"pets[0].type.new": [
+					"true",
+					"false"
+				],
+				"pets[0].visits[0].new": [
+					"true",
+					"false"
+				]
+			}
+		},
+		"/owners/{ownerId}/pets/new": {
+			"get": {
+				"new": [
+					"true",
+					"false"
+				],
+				"pets[0].new": [
+					"true",
+					"false"
+				],
+				"pets[0].owner.new": [
+					"true",
+					"false"
+				],
+				"pets[0].type.new": [
+					"true",
+					"false"
+				],
+				"pets[0].visits[0].new": [
+					"true",
+					"false"
+				]
+			},
+			"post": {
+				"new": [
+					"true",
+					"false"
+				],
+				"owner.new": [
+					"true",
+					"false"
+				],
+				"owner.pets[0].new": [
+					"true",
+					"false"
+				],
+				"owner.pets[0].type.new": [
+					"true",
+					"false"
+				],
+				"owner.pets[0].visits[0].new": [
+					"true",
+					"false"
+				],
+				"pets[0].new": [
+					"true",
+					"false"
+				],
+				"pets[0].owner.new": [
+					"true",
+					"false"
+				],
+				"pets[0].type.new": [
+					"true",
+					"false"
+				],
+				"pets[0].visits[0].new": [
+					"true",
+					"false"
+				],
+				"type.new": [
+					"true",
+					"false"
+				],
+				"visits[0].new": [
+					"true",
+					"false"
+				]
+			}
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"post": {
+				"new": [
+					"true",
+					"false"
+				],
+				"owner.new": [
+					"true",
+					"false"
+				],
+				"owner.pets[0].new": [
+					"true",
+					"false"
+				],
+				"owner.pets[0].type.new": [
+					"true",
+					"false"
+				],
+				"owner.pets[0].visits[0].new": [
+					"true",
+					"false"
+				],
+				"pets[0].new": [
+					"true",
+					"false"
+				],
+				"pets[0].owner.new": [
+					"true",
+					"false"
+				],
+				"pets[0].type.new": [
+					"true",
+					"false"
+				],
+				"pets[0].visits[0].new": [
+					"true",
+					"false"
+				],
+				"type.new": [
+					"true",
+					"false"
+				],
+				"visits[0].new": [
+					"true",
+					"false"
+				]
+			}
+		}
+	},
+	"notDocumentedAndTested": {
+		"/owners": {
+			"get": {
+				"new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": []
+			}
+		},
+		"/owners/new": {
+			"post": {
+				"new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": []
+			}
+		},
+		"/owners/{ownerId}/edit": {
+			"post": {
+				"new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": []
+			}
+		},
+		"/owners/{ownerId}/pets/new": {
+			"get": {
+				"new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": []
+			},
+			"post": {
+				"new": [],
+				"owner.new": [],
+				"owner.pets[0].new": [],
+				"owner.pets[0].type.new": [],
+				"owner.pets[0].visits[0].new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": [],
+				"type.new": [],
+				"visits[0].new": []
+			}
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"post": {
+				"new": [],
+				"owner.new": [],
+				"owner.pets[0].new": [],
+				"owner.pets[0].type.new": [],
+				"owner.pets[0].visits[0].new": [],
+				"pets[0].new": [],
+				"pets[0].owner.new": [],
+				"pets[0].type.new": [],
+				"pets[0].visits[0].new": [],
+				"type.new": [],
+				"visits[0].new": []
+			}
+		}
+	}
+}

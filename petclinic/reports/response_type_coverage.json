@@ -1,0 +1,313 @@
+{
+	"documentedAndTested": {},
+	"documentedAndNotTested": {
+		"/error": {
+			"get": [
+				"*/*"
+			],
+			"put": [
+				"*/*"
+			],
+			"post": [
+				"*/*"
+			],
+			"delete": [
+				"*/*"
+			],
+			"options": [
+				"*/*"
+			],
+			"head": [
+				"*/*"
+			],
+			"patch": [
+				"*/*"
+			],
+			"trace": [
+				"*/*"
+			]
+		},
+		"/oups": {
+			"get": [
+				"*/*"
+			]
+		},
+		"/actuator/beans": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/caches": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			],
+			"delete": [
+				"*/*"
+			]
+		},
+		"/actuator/caches/{cache}": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			],
+			"delete": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/conditions": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/configprops": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/configprops/{prefix}": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/env": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/env/{toMatch}": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/health": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/health/**": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/heapdump": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/actuator/info": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/loggers": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/loggers/{name}": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			],
+			"post": [
+				"*/*"
+			]
+		},
+		"/actuator/mappings": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/metrics": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/metrics/{requiredMetricName}": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/scheduledtasks": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/actuator/threaddump": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"text/plain;charset=UTF-8",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/owners": {
+			"get": [
+				"*/*"
+			]
+		},
+		"/owners/find": {
+			"get": [
+				"*/*"
+			]
+		},
+		"/owners/new": {
+			"get": [
+				"*/*"
+			],
+			"post": [
+				"*/*"
+			]
+		},
+		"/owners/{ownerId}": {
+			"get": [
+				"*/*"
+			]
+		},
+		"/owners/{ownerId}/edit": {
+			"get": [
+				"*/*"
+			],
+			"post": [
+				"*/*"
+			]
+		},
+		"/owners/{ownerId}/pets/new": {
+			"get": [
+				"*/*"
+			],
+			"post": [
+				"*/*"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"get": [
+				"*/*"
+			],
+			"post": [
+				"*/*"
+			]
+		},
+		"/vets": {
+			"get": [
+				"*/*"
+			]
+		},
+		"/vets.html": {
+			"get": [
+				"*/*"
+			]
+		},
+		"/owners/*/pets/{petId}/visits/new": {
+			"get": [
+				"*/*"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/visits/new": {
+			"post": [
+				"*/*"
+			]
+		},
+		"/actuator": {
+			"get": [
+				"application/json",
+				"application/vnd.spring-boot.actuator.v2+json",
+				"application/vnd.spring-boot.actuator.v3+json"
+			]
+		},
+		"/": {
+			"get": [
+				"*/*"
+			]
+		}
+	},
+	"notDocumentedAndTested": {
+		"/": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/owners": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/owners/*/pets/{petId}/visits/new": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/owners/find": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/owners/new": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/owners/{ownerId}": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/owners/{ownerId}/edit": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/owners/{ownerId}/pets/new": {
+			"get": [
+				"application/octet-stream"
+			],
+			"post": [
+				"application/octet-stream"
+			]
+		},
+		"/owners/{ownerId}/pets/{petId}/edit": {
+			"get": [
+				"application/octet-stream"
+			]
+		},
+		"/vets.html": {
+			"get": [
+				"application/octet-stream"
+			]
+		}
+	}
+}

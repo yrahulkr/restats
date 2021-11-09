@@ -1,0 +1,7 @@
+{
+	"modules": "all",
+	"specification": "petclinic2/spec.json",
+	"reportsDir": "petclinic2/reports",
+	"dbPath": "petclinic2/database.sqlite",
+    "results": "petclinic2/resultResponses.json"
+}

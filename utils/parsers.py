@@ -3,6 +3,138 @@ import json
 
 methodsWithRequestBody = {'post', 'put', 'patch'}
 
+
+def parsePostData(postData):
+	params = {}
+
+	try:
+		split = postData.split(sep="&")
+		for splitItem in split:
+			if splitItem is None or len(splitItem.strip()) == 0:
+				continue
+
+			paramItemSplit = splitItem.split(sep="=")
+
+			if len(paramItemSplit) >= 2:
+				name = paramItemSplit[0]
+				value = "".join(paramItemSplit[1:])
+			elif len(paramItemSplit) == 1:
+				name = paramItemSplit[0]
+				value = ''
+			else:
+				continue
+
+			params[name] = value
+	except:
+		print("cannot parse {}".format(postData))
+
+	return params
+	'''for (int i = 0; i < split.length; i++) {
+	System.out.println(split[i]);
+	try {
+
+	String[] splitParam = split[i].split("=");
+	if (split[i].contains("=") & & splitParam.length < 2) {
+	params.add(new BasicNameValuePair(splitParam[0], ""));
+	} else {
+	params.add(new BasicNameValuePair(splitParam[0], splitParam[1]));
+	}
+	} catch (Exception ex) {
+	ex.printStackTrace();
+	}
+	}
+	} catch(Exception
+	ex) {
+		ex.printStackTrace();
+	LOG.error("Cannot parse Post Data");
+	}
+	return params;'''
+
+
+def parseJsonResult(jsonFile):
+	results = []
+	try:
+		with open(jsonFile) as jsonF:
+			results = json.load(jsonF)
+	except:
+		print("Cannot get results from " + str(jsonFile))
+		return
+	if len(results) <= 0:
+		print("Could not find any results in : " + str(jsonFile))
+		return []
+
+	returnDict = []
+
+	for result in results:
+		returnDictElem = JsonResponse2Dict(result)
+		print(returnDictElem)
+		returnDict.append(returnDictElem)
+	# print(results)
+
+	return returnDict
+
+
+def JsonResponse2Dict(jsonResult):
+	request = jsonResult["request"]
+	if "response" in jsonResult:
+		response = jsonResult["response"]
+	else:
+		response = None
+
+	if "postData" in request:
+		postData = parsePostData(request["postData"])
+	else:
+		postData = {}
+
+	parameters = []
+
+	path = urlsplit(request["requestUrl"])[2]
+
+	# Parse query parameters
+	# It is a dictionary like
+	# {param_name : [param_value]}
+	queryParam = parse_qs(urlsplit(request["requestUrl"])[3])
+
+	# Add query parameters in the parameters dictionary
+	for k, v in queryParam.items():
+		parameters.append({'in': 'query', 'name': k, 'value': v[0]})
+
+	for header in request["headers"]:
+		parameters.append({'in': 'header', 'name': header["name"], 'value': header["value"]})
+
+	requestDict = {
+		'method': request["method"].lower(),
+		'url': request["requestUrl"],
+		'version': "HTTP 1.0",
+		'path': path,
+		'parameters': parameters,
+		'body': postData
+	}
+
+	if response is not None:
+		status = response["status"]
+		message = response["message"]
+		responseParams = []
+		for header in response["headers"]:
+			parameters.append({'in': 'header', 'name': header["name"], 'value': header["value"]})
+		# body = response["body"]
+		body = ''
+
+		responseDict = {
+			'status': status,
+			'message': message,
+			'parameters': responseParams,
+			'body': body
+		}
+
+	else:
+		responseDict = {}
+
+
+
+	return {"request": requestDict, "response": responseDict}
+
+
 def RawHTTPRequest2Dict(requestFile):
 	"""
 	Parses a raw HTTP Request from a file and casts it to a dictionary.
@@ -32,7 +164,7 @@ def RawHTTPRequest2Dict(requestFile):
 
 		# Add query parameters in the parameters dictionary
 		for k, v in queryParam.items():
-			parameters.append({'in' : 'query', 'name' : k, 'value' : v[0]})
+			parameters.append({'in': 'query', 'name': k, 'value': v[0]})
 
 		# The first line has already been read. The next lines contain the headers
 		lines = f.readlines()
@@ -41,7 +173,7 @@ def RawHTTPRequest2Dict(requestFile):
 
 			# If an empty line is found, then there are no other headers.
 			# There could only be some POST parameters left to parse.
-			if line == '\r\n' :
+			if line == '\r\n':
 				stop = i
 				break
 
@@ -53,7 +185,7 @@ def RawHTTPRequest2Dict(requestFile):
 			if name == 'X-Burp-Comment': continue
 
 			# Add every header as parameter
-			parameters.append({ 'in' : 'header', 'name' : name, 'value' : value})
+			parameters.append({'in': 'header', 'name': name, 'value': value})
 
 			# Check if POST (form) parameters are present
 			if name == 'Content-Type' and value == 'application/x-www-form-urlencoded':
@@ -63,13 +195,13 @@ def RawHTTPRequest2Dict(requestFile):
 			elif name == 'Content-Type' and value in ('application/vnd.api+json', 'application/json'):
 				hasJSONbody = True
 
-		if  hasFormParams:
+		if hasFormParams:
 
 			line = str(f.readline(), 'UTF-8')
 			formParams = parse_qs(line)
 
 			for k, v in formParams.items():
-				parameters.append({'in' : 'query', 'name' : k, 'value' : v[0]})
+				parameters.append({'in': 'query', 'name': k, 'value': v[0]})
 
 		elif hasJSONbody:
 			lines = [str(x, 'UTF-8') for x in lines[stop + 1:]]
@@ -81,13 +213,14 @@ def RawHTTPRequest2Dict(requestFile):
 				body = {}
 
 	return {
-	'method' : method.lower(),
-	'url' : url,
-	'version' : version,
-	'path' : path,
-	'parameters' : parameters,
-	'body' : body
+		'method': method.lower(),
+		'url': url,
+		'version': version,
+		'path': path,
+		'parameters': parameters,
+		'body': body
 	}
+
 
 def RawHTTPResponse2Dict(responseFile):
 	"""
@@ -99,18 +232,17 @@ def RawHTTPResponse2Dict(responseFile):
 	parameters = []
 	body = ''
 
-
 	# Have to open the file as binary because of the payload
 	with responseFile.open('rb') as f:
 		line = str(f.readline(), 'UTF-8')
 
 		# Check whether the file is empty or not
-		if line == '' : return {}
+		if line == '': return {}
 
 		line = line.split()
 
 		status = line[1]
-		message = ' '.join(line[2:]) #Joins with a whitespace all the words from the message
+		message = ' '.join(line[2:])  # Joins with a whitespace all the words from the message
 
 		# The first line has already been read. The next lines contain the headers
 		for line in f.readlines():
@@ -127,13 +259,14 @@ def RawHTTPResponse2Dict(responseFile):
 			if line[0] == 'Content-Type':
 				line[1] = line[1].split(';')[0]
 
-			parameters.append({ 'in' : 'header', 'name' : line[0], 'value' : ':'.join([x.strip(' \r\n') for x in line[1:]])})
-	
+			parameters.append(
+				{'in': 'header', 'name': line[0], 'value': ':'.join([x.strip(' \r\n') for x in line[1:]])})
+
 	return {
-	'status' : status,
-	'message' : message,
-	'parameters' : parameters,
-	'body' : body
+		'status': status,
+		'message': message,
+		'parameters': parameters,
+		'body': body
 	}
 
 
@@ -150,7 +283,6 @@ def pair2json(pairDict, number, dirPath):
 
 
 def json2pair(jsonFile):
-
 	with open(jsonFile) as jf:
 		data = json.load(jf)
 
@@ -204,10 +336,10 @@ def extractSpecificationData(specFile):
 
 		# Check the specification version
 		if 'swagger' in data.keys():
-			extractedData =  parseSwagger2(data)
+			extractedData = parseSwagger2(data)
 
 		elif 'openapi' in data.keys():
-			extractedData =  parseOpenAPI3(data)
+			extractedData = parseOpenAPI3(data)
 
 		else:
 			raise Exception('Version not parsable')
@@ -217,6 +349,7 @@ def extractSpecificationData(specFile):
 	except:
 		print('Could not open specification file.')
 		quit()
+
 
 def parseOpenAPI3(data):
 	newSpec = dict()
@@ -231,7 +364,6 @@ def parseOpenAPI3(data):
 	else:
 		newSpec['bases'] = ['/']
 
-
 	# Iterate through all the paths in the specification
 	for path in data['paths']:
 		newSpec[path] = {}
@@ -239,9 +371,9 @@ def parseOpenAPI3(data):
 		# Iterate through all the methods of a path
 		for method in data['paths'][path]:
 			method = method.lower()
-			
+
 			newSpec[path][method] = \
-				{'parameters' : {}, 'pathParameters': [], 'responses' : [], 'produces' : [], 'consumes' : []}
+				{'parameters': {}, 'pathParameters': [], 'responses': [], 'produces': [], 'consumes': []}
 
 			# Get every parameter description for the method
 			# Before check it there are parameters
@@ -269,7 +401,6 @@ def parseOpenAPI3(data):
 					else:
 						newSpec[path][method]['parameters'][parameter['name']] = []
 
-
 			# Extract status codes
 			for status, val in data['paths'][path][method]['responses'].items():
 				newSpec[path][method]['responses'].append(status)
@@ -287,11 +418,12 @@ def parseOpenAPI3(data):
 					newSpec[path][method]['consumes'] = newSpec[path][method]['parameters']['Content-Type']
 
 				elif 'requestBody' in data['paths'][path][method].keys():
-					newSpec[path][method]['consumes'] = list(data['paths'][path][method]['requestBody']['content'].keys())
+					newSpec[path][method]['consumes'] = list(
+						data['paths'][path][method]['requestBody']['content'].keys())
 
 			# Remove duplicates in produces and consumes
 			newSpec[path][method]['produces'] = list(set(newSpec[path][method]['produces']))
-			#newSpec[path][method]['consumes'] = list(set(newSpec[path][method]['consumes']))
+	# newSpec[path][method]['consumes'] = list(set(newSpec[path][method]['consumes']))
 
 	return newSpec
 
@@ -299,7 +431,7 @@ def parseOpenAPI3(data):
 def parseSwagger2(data):
 	newSpec = dict()
 
-	defaultConsumes = [] # only affects operations with a request body
+	defaultConsumes = []  # only affects operations with a request body
 	defaultProduces = []
 
 	# Set default consumes & produces
@@ -326,7 +458,7 @@ def parseSwagger2(data):
 			method = method.lower()
 
 			newSpec[path][method] = \
-				{'parameters' : {}, 'pathParameters' : [], 'responses' : [], 'produces' : [], 'consumes' : []}
+				{'parameters': {}, 'pathParameters': [], 'responses': [], 'produces': [], 'consumes': []}
 
 			# Get every parameter description for the method
 			# Before check if there are parameters
@@ -372,7 +504,7 @@ def parseSwagger2(data):
 				else:
 					newSpec[path][method]['consumes'] = defaultConsumes
 
-				# Check also the content-type header parameter
+			# Check also the content-type header parameter
 
 			# Extract output content-types
 			if 'produces' in data['paths'][path][method].keys():
@@ -382,12 +514,11 @@ def parseSwagger2(data):
 
 	return newSpec
 
-				
-
 
 if __name__ == '__main__':
+	# d = extractSpecificationData('../specifications/slim.json')
+	spec = extractSpecificationData("../petclinic/spec.json")
+	resultDict = parseJsonResult(
+		"../petclinic/resultResponses.json")
 
-	d = extractSpecificationData('../specifications/slim.json')
-
-	print(d)
-	
+	print()
