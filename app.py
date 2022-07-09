@@ -17,15 +17,34 @@ def callOptionMethod(confDict):
 
 	if modules == 'dataCollection':
 		paths = list(specDict.keys())
-		pairing.generatePairs(confDict, paths, bases)
+		pairing.generatePairs(confDict, paths, bases, dbFile=confDict['dbPath'])
 
 	elif modules == 'statistics':
-		stat.generateStats(specDict, confDict)
+		stat.generateStats(specDict, dbfile=confDict['dbPath'], dest=confDict['reportsDir'])
+
+	elif modules == 'carver':
+		paths = list(specDict.keys())
+		pairing.generatePairs(confDict, paths, bases, dbFile=confDict['dbPath'])
+		stat.generateStats(specDict, dbfile=confDict['dbPath'], dest=confDict['reportsDir'])
 
 	elif modules == 'all':
 		paths = list(specDict.keys())
-		pairing.generatePairs(confDict, paths, bases)
-		stat.generateStats(specDict, confDict)
+		pairing.generatePairs(confDict, paths, bases, dbFile=confDict['dbPath'])
+		stat.generateStats(specDict, dbfile=confDict['dbPath'], dest=confDict['reportsDir'])
+		pairing.generatePairs(confDict, paths, bases, dbFile=confDict['cassetteDbPath'], schemathesis=True)
+		stat.generateStats(specDict, dbfile=confDict['dbPath'], dest=confDict['cassetteReportsDir'])
+
+	elif modules == 'specCompare':
+		specDict = par.extractSpecificationData(conf['specification'])
+		# paths = list(specDict.keys())
+		# pairing.generateSpecPairs(confDict, paths, bases)
+		# stat.generateStats(specDict, confDict)
+		pairing.compareSpecs(specDict, confDict)
+
+	elif modules == "schemathesis":
+		paths = list(specDict.keys())
+		pairing.generatePairs(confDict, paths, bases, dbFile=confDict['cassetteDbPath'], schemathesis=True)
+		stat.generateStats(specDict, dbfile=confDict['cassetteDbPath'], dest=confDict['cassetteReports'])
 
 	else:
 		raise Exception('Wrong module. [pair/statistics/all]')

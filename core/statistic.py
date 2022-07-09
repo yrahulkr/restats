@@ -4,14 +4,14 @@ import json
 import utils.parsers as parsers
 import utils.dbmanager as dbm
 
-dest = None
+# dest = None
 jsonTestedKey = 'documentedAndTested'
 jsonNotTestedKey = 'documentedAndNotTested'
 jsonNotExpectedKey = 'notDocumentedAndTested'
 jsonFoundKey = 'totalTested'
 jsonTotalKey = 'documented'
 
-def getPathCoverage(paths, dbfile):
+def getPathCoverage(paths, dbfile, dest):
 	dbm.create_connection(dbfile)
 
 	count = dbm.getPathCount()
@@ -29,15 +29,15 @@ def getPathCoverage(paths, dbfile):
 
 	return {jsonTotalKey : len(paths), jsonTestedKey : count, jsonFoundKey : count}
 
-	with open(dest + 'path_coverage.json', 'w+') as out:
-		json.dump({jsonTestedKey : testedPaths, jsonNotTestedKey : untestedPaths}, out, indent='\t')
+	# with open(dest + 'path_coverage.json', 'w+') as out:
+	# 	json.dump({jsonTestedKey : testedPaths, jsonNotTestedKey : untestedPaths}, out, indent='\t')
+	#
+	# dbm.close()
+	#
+	# return {jsonTestedKey : count, 'total' : len(paths), jsonNotTestedKey : len(untestedPaths)}
 
-	dbm.close()
 
-	return {jsonTestedKey : count, 'total' : len(paths), jsonNotTestedKey : len(untestedPaths)}
-
-
-def getOperationCoverage(specDict, dbfile):
+def getOperationCoverage(specDict, dbfile, dest):
 	dbm.create_connection(dbfile)
 
 	# Count the number of methods for each path in the specification
@@ -79,7 +79,7 @@ def getOperationCoverage(specDict, dbfile):
 	return {jsonTotalKey : operationsPerPathCount, jsonTestedKey : operationsTestedCount, jsonFoundKey : operationsFoundCount}
 
 
-def getStatusCoverage(specDict, dbfile):
+def getStatusCoverage(specDict, dbfile, dest):
 	dbm.create_connection(dbfile)
 
 	statusInSpecCount = 0
@@ -125,7 +125,7 @@ def getStatusCoverage(specDict, dbfile):
 
 # TODO
 # Update with found. Need to check whether set.add added or not.
-def getStatusClassCoverage(specDict, dbfile):
+def getStatusClassCoverage(specDict, dbfile, dest):
 	dbm.create_connection(dbfile)
 
 	statusInSpecCount = 0
@@ -184,7 +184,7 @@ def getStatusClassCoverage(specDict, dbfile):
 	return {jsonTotalKey : statusInSpecCount, jsonTestedKey : statusTestedCount}
 
 
-def getResponseContentTypeCoverage(specDict, dbfile):
+def getResponseContentTypeCoverage(specDict, dbfile, dest):
 	dbm.create_connection(dbfile)
 
 	typesInSpecCount = 0
@@ -228,7 +228,7 @@ def getResponseContentTypeCoverage(specDict, dbfile):
 
 # TODO
 # Copia esatta del response. Collassare tutto in una sola funzione?
-def getRequestContentTypeCoverage(specDict, dbfile):
+def getRequestContentTypeCoverage(specDict, dbfile, dest):
 	dbm.create_connection(dbfile)
 
 	typesInSpecCount = 0
@@ -270,7 +270,7 @@ def getRequestContentTypeCoverage(specDict, dbfile):
 	return {jsonTotalKey : typesInSpecCount, jsonTestedKey : typesTestedCount, jsonFoundKey : typesFoundCount}
 
 
-def getParameterCoverage(specDict, dbfile):
+def getParameterCoverage(specDict, dbfile, dest):
 	dbm.create_connection(dbfile)
 
 	parametersInSpecCount = 0
@@ -311,7 +311,7 @@ def getParameterCoverage(specDict, dbfile):
 	return {jsonTotalKey : parametersInSpecCount, jsonTestedKey : parametersTestedCount, jsonFoundKey : parametersFoundCount}
 
 
-def getParameterValueCoverage(specDict, dbfile):
+def getParameterValueCoverage(specDict, dbfile, dest):
 	dbm.create_connection(dbfile)
 
 	# Extract compatible parameters from specification
@@ -397,50 +397,52 @@ def computeTCL(coverageDictionary):
 
 
 
-def generateStats(specDict, confDict):
-	global dest
+def generateStats(specDict, dbfile, dest):
+	# global dest
 
 	calcRate = lambda d : d[jsonTestedKey] / d[jsonTotalKey] if d[jsonTotalKey] != 0 else None
 	newStatEntry = lambda d : {'raw' : d, 'rate' : calcRate(d)}
 
-	dest = confDict['reportsDir']
+	# dest = confDict['reportsDir']
 	#temp fix
 	if dest[-1] != '/':
 		dest = dest + '/'
-	dbfile = confDict['dbPath']
+
+	# dbfile = confDict['dbPath']
+
 	covDict = {}
 	paths = list(specDict.keys())
 
 	#-----------
-	pathCovergage = getPathCoverage(paths, dbfile)
+	pathCovergage = getPathCoverage(paths, dbfile, dest)
 	covDict['pathCoverage'] = newStatEntry(pathCovergage)
 
 	#-----------
-	operationCoverage = getOperationCoverage(specDict, dbfile)
+	operationCoverage = getOperationCoverage(specDict, dbfile, dest)
 	covDict['operationCoverage'] = newStatEntry(operationCoverage)
 
 	#-----------
-	statusClassCoverage = getStatusClassCoverage(specDict, dbfile)
+	statusClassCoverage = getStatusClassCoverage(specDict, dbfile, dest)
 	covDict['statusClassCoverage'] = newStatEntry(statusClassCoverage)
 
 	#-----------
-	statusCoverage = getStatusCoverage(specDict, dbfile)
+	statusCoverage = getStatusCoverage(specDict, dbfile, dest)
 	covDict['statusCoverage'] = newStatEntry(statusCoverage)
 
 	#-----------
-	respTypeCoverage = getResponseContentTypeCoverage(specDict, dbfile)
+	respTypeCoverage = getResponseContentTypeCoverage(specDict, dbfile, dest)
 	covDict['responseTypeCoverage'] = newStatEntry(respTypeCoverage)
 
 	#-----------
-	reqTypeCoverage = getRequestContentTypeCoverage(specDict, dbfile)
+	reqTypeCoverage = getRequestContentTypeCoverage(specDict, dbfile, dest)
 	covDict['requestTypeCoverage'] = newStatEntry(reqTypeCoverage)
 
 	#-----------
-	paramCoverage = getParameterCoverage(specDict, dbfile)
+	paramCoverage = getParameterCoverage(specDict, dbfile, dest)
 	covDict['parameterCoverage'] = newStatEntry(paramCoverage)
 
 	#-----------
-	paramValueCoverage = getParameterValueCoverage(specDict, dbfile)
+	paramValueCoverage = getParameterValueCoverage(specDict, dbfile, dest)
 	covDict['parameterValueCoverage'] = newStatEntry(paramValueCoverage)
 
 	covDict['TCL'] = computeTCL(covDict)

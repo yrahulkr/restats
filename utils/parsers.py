@@ -1,5 +1,7 @@
+import traceback
 from urllib.parse import parse_qs, urlsplit
 import json
+import ruamel.yaml
 
 methodsWithRequestBody = {'post', 'put', 'patch'}
 
@@ -73,6 +75,58 @@ def parseJsonResult(jsonFile):
 
 	return returnDict
 
+def yamlResponse2Dict(yamlResult):
+	request = yamlResult["request"]
+	response = yamlResult["response"]
+
+	if 'body' in request:
+		postData = parsePostData(request['body'])
+	else:
+		postData = {}
+
+	parameters = []
+	path = urlsplit(request['uri'])[2]
+
+	queryParam = parse_qs(urlsplit(request["uri"])[3])
+
+	# Add query parameters in the parameters dictionary
+	for k, v in queryParam.items():
+		parameters.append({'in': 'query', 'name': k, 'value': v[0]})
+
+	for header in request["headers"]:
+		parameters.append({'in': 'header', 'name': header, 'value': request["headers"][header]})
+
+	requestDict = {
+		'method': request["method"].lower(),
+		'url': request["uri"],
+		'version': "HTTP 1.0",
+		'path': path,
+		'parameters': parameters,
+		'body': postData
+	}
+
+	if response is not None:
+		status = response["status"]["code"]
+		message = response["status"]["message"]
+		responseParams = []
+		for header in response["headers"]:
+			parameters.append({'in': 'header', 'name': header, 'value': response["headers"][header]})
+		# body = response["body"]
+		body = ''
+
+		responseDict = {
+			'status': status,
+			'message': message,
+			'parameters': responseParams,
+			'body': body
+		}
+
+	else:
+		responseDict = {}
+
+
+
+	return {"request": requestDict, "response": responseDict}
 
 def JsonResponse2Dict(jsonResult):
 	request = jsonResult["request"]
@@ -329,10 +383,17 @@ def extractSpecificationData(specFile):
 	Il tutto va in un dizionario di dizionario di set (più comodi rispetto ad una lista).
 	Gli status e i content-type possono andare in un semplice set.
 	'''
-
 	try:
-		with open(specFile) as spec:
-			data = json.load(spec)
+
+		if ('.yml' in specFile) or ('.yaml' in specFile):
+			with open(specFile) as spec:
+				yaml = ruamel.yaml.YAML(typ='safe')
+				data = yaml.load(spec)
+				data = json.loads(json.dumps(data))
+		else:
+			with open(specFile) as spec:
+				data = json.load(spec)
+
 
 		# Check the specification version
 		if 'swagger' in data.keys():
@@ -346,7 +407,9 @@ def extractSpecificationData(specFile):
 
 		return extractedData
 
-	except:
+	except Exception as ex:
+		print(ex)
+		traceback.print_ex()
 		print('Could not open specification file.')
 		quit()
 
@@ -368,19 +431,53 @@ def parseOpenAPI3(data):
 	for path in data['paths']:
 		newSpec[path] = {}
 
+		# Get every parameter description for the method
+		# Before check it there are parameters
+		pathParameters = []
+		parameters = {}
+		if 'parameters' in data['paths'][path].keys():
+
+			for parameter in data['paths'][path]['parameters']:
+
+				if parameter['in'] == 'header':
+					continue
+
+				# If parameter in path treat it differently (for parameter coverage)
+				if parameter['in'] == 'path':
+					pathParameters.append(parameter['name'])
+
+				# In OpenAPI 3 there could be schema xor content
+				elif 'schema' in parameter.keys():
+					if 'enum' in parameter['schema'].keys():
+						parameters[parameter['name']] = parameter['schema']['enum']
+
+					elif parameter['schema']['type'] == 'boolean':
+						# Use true, false instead of False, True because of python json serialization
+						parameters[parameter['name']] = ['true', 'false']
+
+					else:
+						parameters[parameter['name']] = []
+
+				else:
+					parameters[parameter['name']] = []
+
 		# Iterate through all the methods of a path
 		for method in data['paths'][path]:
 			method = method.lower()
+			if method == 'parameters':
+				#Ignore common parameters. It is not a method
+				continue
 
 			newSpec[path][method] = \
-				{'parameters': {}, 'pathParameters': [], 'responses': [], 'produces': [], 'consumes': []}
+				{'parameters': parameters, 'pathParameters': pathParameters, 'responses': [], 'produces': [], 'consumes': []}
 
 			# Get every parameter description for the method
 			# Before check it there are parameters
 			if 'parameters' in data['paths'][path][method].keys():
 
 				for parameter in data['paths'][path][method]['parameters']:
-
+					if parameter['in'] == 'header':
+						continue
 					# If parameter in path treat it differently (for parameter coverage)
 					if parameter['in'] == 'path':
 						newSpec[path][method]['pathParameters'].append(parameter['name'])
