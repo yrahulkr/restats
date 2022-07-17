@@ -5,6 +5,7 @@ import json
 
 from ruamel import yaml
 
+import utils
 import utils.parsers as parsers
 import utils.dbmanager as dbm
 import ruamel.yaml
@@ -405,9 +406,11 @@ def compareSpecs(oldSpec, confDict):
 
 	print(paths_re)
 
+	opDict = {}
 	pairDict = {}
 	print("inferred Paths: {}".format(inferredPaths))
 	for inferredPath in inferredPaths:
+
 		buildPath = inferredPath.replace("{", "")
 		buildPath = buildPath.replace("}", "")
 		print(buildPath)
@@ -416,6 +419,13 @@ def compareSpecs(oldSpec, confDict):
 
 			if r.match(buildPath):
 				match = True
+				inferredOperations = inferredDict[inferredPath].keys()
+				originalOperations = oldSpec[path].keys()
+				print(inferredOperations)
+				print(originalOperations)
+				for opKey in inferredOperations:
+					if opKey in originalOperations:
+						opDict[inferredPath+"-"+opKey] = path+"-"+opKey
 				pairDict[inferredPath] = path
 				print(pairDict)
 				break
@@ -426,6 +436,20 @@ def compareSpecs(oldSpec, confDict):
 	print(covered)
 	print(pathsInSpec)
 	print("coverage : {}, precision : {}".format(coverage, precision))
+
+	opCovered = set(opDict.values())
+	totalOperations = 0
+	for path in oldSpec.keys():
+		totalOperations+=len(oldSpec[path].keys())
+
+	operationPr= len(opCovered)/len(opDict.keys())
+	operationRe= len(opCovered)/totalOperations
+	covDict = {"pathPr": precision, "pathRe": coverage, "operationPr": operationPr, "operationRe": operationRe}
+
+	with open(confDict["specReports"] + '/stats.json', 'w+') as out:
+		json.dump(covDict, out, indent='\t')
+		print('Metrics and statistics computed successfully. Reports are available at', confDict["specReports"])
+
 
 def generateSpecPairs(confDict, pathsInSpec, basesInSpec):
 	if "inferred" in confDict:
@@ -493,3 +517,16 @@ def generateSpecPairs(confDict, pathsInSpec, basesInSpec):
 
 ####     END     ####
 #####################
+
+if __name__=="__main__":
+	with open("/Users/rahulkrishna/git/TestCarving/testCarver/out/parabank/20220710_035630/oas/20220710_043329/oas_conf.json") as j:
+	# with open("/Users/rahulkrishna/git/TestCarving/testCarver/out/booker/20220711_144103/oas/20220711_151840/oas_conf.json") as j:
+		conf = json.load(j)
+
+	for k in conf:
+		conf[k] = conf[k][:-1] if conf[k][-1] == '/' else conf[k]
+
+	specDict = utils.parsers.extractSpecificationData(conf['specification'])
+
+
+	compareSpecs(specDict, conf)

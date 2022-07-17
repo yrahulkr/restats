@@ -8,6 +8,11 @@ methodsWithRequestBody = {'post', 'put', 'patch'}
 
 def parsePostData(postData):
 	params = {}
+	if postData is None:
+		print("Cannot parse None")
+		return None
+	if type(postData) is dict and "string" in postData.keys():
+		postData = postData["string"]
 
 	try:
 		split = postData.split(sep="&")
